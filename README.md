@@ -1,7 +1,8 @@
 # NEXT by Meyer & Denker – Landingpage
 
 Einfache, statische Landingpage zur Bewerbung der Workshop-Reihe **NEXT** für Young Professionals.
-Reines HTML/CSS, kein Build-Schritt, keine Abhängigkeiten – bereit für **GitHub Pages**.
+Reines HTML/CSS, kein Build-Schritt, keine Abhängigkeiten. Gehostet bei **Strato**
+(Domain: **meyerdenker.de**), automatisch veröffentlicht per **GitHub Actions**.
 
 ## Dateien
 
@@ -10,19 +11,31 @@ Reines HTML/CSS, kein Build-Schritt, keine Abhängigkeiten – bereit für **Git
 | `index.html` | Komplette Landingpage (alle Inhalte) |
 | `styles.css` | Design & Layout (Farben zentral über CSS-Variablen) |
 | `assets/` | Logo und Gründerinnen-Porträts |
+| `.github/workflows/deploy.yml` | Automatischer FTPS-Upload zu Strato bei Push auf `main` |
 
 ## Lokal ansehen
 
 `index.html` einfach im Browser öffnen (Doppelklick). Kein Server nötig.
 
-## Veröffentlichen mit GitHub Pages
+## Veröffentlichen / Pflegen (Strato, automatisch)
 
-1. Änderungen committen und pushen.
-2. Im Repository: **Settings → Pages**.
-3. Unter **Source** „Deploy from a branch“ wählen.
-4. Branch auswählen (empfohlen: `main` nach dem Merge) und Ordner **`/root`**, dann **Save**.
-5. Nach ~1 Minute ist die Seite erreichbar unter:
-   `https://revel85.github.io/landingpage_meyer_denker/`
+Ablauf im Alltag: **hier ändern → committen → `git push` auf `main`** → die GitHub Action lädt
+die geänderten Dateien automatisch per verschlüsseltem FTPS zu Strato hoch. Fertig.
+
+### Einmalige Einrichtung
+
+1. **Strato – FTP/SFTP-Zugang anlegen:** Im Strato-Kundenbereich einen (S)FTP-Benutzer erstellen
+   (oder den vorhandenen nutzen). Notieren: **Server/Host**, **Benutzername**, **Passwort**.
+2. **Domain zuweisen:** In der Strato-Domainverwaltung **meyerdenker.de** auf den Upload-Ordner
+   zeigen lassen (Webspace-Root `/` oder ein Unterordner) und **SSL/Let's Encrypt** aktivieren.
+3. **GitHub-Zugangsdaten hinterlegen** unter *Repo → Settings → Secrets and variables → Actions*:
+   - **Secrets:** `STRATO_FTP_SERVER`, `STRATO_FTP_USERNAME`, `STRATO_FTP_PASSWORD`
+   - **Variable:** `STRATO_REMOTE_DIR` = Zielordner im Webspace (z. B. `/`)
+4. **Auf `main` bringen:** Diesen Branch nach `main` mergen. Danach läuft der Deploy bei jedem Push
+   automatisch (Fortschritt unter *Repo → Actions → „Deploy to Strato“*).
+
+> Der Workflow lädt nur die Web-Dateien hoch; `README.md`, `.github/` und Git-Interna werden
+> ausgeschlossen.
 
 ## Inhalte anpassen
 

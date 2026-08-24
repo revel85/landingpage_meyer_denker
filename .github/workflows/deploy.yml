@@ -1,0 +1,40 @@
+name: Deploy to Strato
+
+# Lädt die statische Landingpage bei jedem Push auf `main` automatisch
+# per verschlüsseltem FTPS zum Strato-Webspace hoch.
+# Manuell auslösbar über den "Run workflow"-Button (workflow_dispatch).
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# Verhindert parallele Deploys (der zuletzt gestartete gewinnt).
+concurrency:
+  group: strato-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload zu Strato (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server:   ${{ secrets.STRATO_FTP_SERVER }}
+          username: ${{ secrets.STRATO_FTP_USERNAME }}
+          password: ${{ secrets.STRATO_FTP_PASSWORD }}
+          protocol: ftps
+          # Zielordner im Webspace (Repo-Variable), z. B. "/" oder "/meyerdenker.de/".
+          # Fällt auf "/" zurück, wenn die Variable nicht gesetzt ist.
+          server-dir: ${{ vars.STRATO_REMOTE_DIR || '/' }}
+          # Nicht-Web-Dateien nicht mit hochladen:
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            README.md
+            **/*.md
