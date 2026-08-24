@@ -11,7 +11,7 @@ Reines HTML/CSS, kein Build-Schritt, keine Abhängigkeiten. Gehostet bei **Strat
 | `index.html` | Komplette Landingpage (alle Inhalte) |
 | `styles.css` | Design & Layout (Farben zentral über CSS-Variablen) |
 | `assets/` | Logo und Gründerinnen-Porträts |
-| `.github/workflows/deploy.yml` | Automatischer FTPS-Upload zu Strato bei Push auf `main` |
+| `.github/workflows/deploy.yml` | Automatischer SFTP-Upload zu Strato bei Push auf `main` |
 
 ## Lokal ansehen
 
@@ -20,7 +20,7 @@ Reines HTML/CSS, kein Build-Schritt, keine Abhängigkeiten. Gehostet bei **Strat
 ## Veröffentlichen / Pflegen (Strato, automatisch)
 
 Ablauf im Alltag: **hier ändern → committen → `git push` auf `main`** → die GitHub Action lädt
-die geänderten Dateien automatisch per verschlüsseltem FTPS zu Strato hoch. Fertig.
+die geänderten Dateien automatisch per SFTP (Port 22) zu Strato hoch. Fertig.
 
 ### Einmalige Einrichtung
 
