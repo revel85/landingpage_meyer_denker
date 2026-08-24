@@ -9,8 +9,10 @@ Reines HTML/CSS, kein Build-Schritt, keine Abhängigkeiten. Gehostet bei **Strat
 | Datei | Inhalt |
 |-------|--------|
 | `index.html` | Komplette Landingpage (alle Inhalte) |
+| `impressum.html` | Impressum (§ 5 TMG) |
+| `datenschutz.html` | Datenschutzerklärung (DSGVO) |
 | `styles.css` | Design & Layout (Farben zentral über CSS-Variablen) |
-| `assets/` | Logo und Gründerinnen-Porträts |
+| `assets/` | Logo, Gründerinnen-Porträts und selbst gehostete Inter-Schrift (`assets/fonts/`) |
 | `.github/workflows/deploy.yml` | Automatischer SFTP-Upload zu Strato bei Push auf `main` |
 
 ## Lokal ansehen
@@ -42,7 +44,7 @@ die geänderten Dateien automatisch per SFTP (Port 22) zu Strato hoch. Fertig.
 Alle Texte stehen direkt in `index.html` – einfach im Editor ändern.
 
 - **Farben** ändern: Variablen ganz oben in `styles.css` (`:root { ... }`).
-- **Kontakt-E-Mail**: im HTML nach `next@meyerdenker.de` suchen und ersetzen.
+- **Kontakt-E-Mail**: im HTML nach `info@meyerdenker.de` suchen und ersetzen.
 - **Porträts**: `assets/founder-2.png` (Marina Meyer) und `assets/founder-1.png` (Carina Denker).
 
 ## Noch zu ergänzen (vor dem finalen Livegang)
@@ -54,4 +56,5 @@ Alle Texte stehen direkt in `index.html` – einfach im Editor ändern.
 ---
 
 Design, Farben (`#008C8C`, `#0F2F36`, `#F4F1EC`, `#CE7359`) und Inhalte wurden aus der
-Marken-Präsentation abgeleitet. Schrift: **Inter**.
+Marken-Präsentation abgeleitet. Schrift: **Inter** (selbst gehostet unter `assets/fonts/`,
+kein externes Font-CDN – DSGVO-freundlich).

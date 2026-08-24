@@ -41,7 +41,7 @@ jobs:
           # Nur die tatsächlich auszuliefernden Dateien in dist/ kopieren
           # (README, .github, Git-Interna bleiben außen vor).
           mkdir -p dist
-          cp index.html impressum.html styles.css dist/
+          cp index.html impressum.html datenschutz.html styles.css dist/
           cp -r assets dist/
 
       - name: Upload zu Strato (SFTP)

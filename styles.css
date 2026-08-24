@@ -3,6 +3,16 @@
    Farben & Schriften aus der Marken-Präsentation abgeleitet.
    ========================================================================= */
 
+/* Inter selbst gehostet (Variable Font, deckt alle Strichstärken ab).
+   Keine externe Font-CDN – DSGVO-freundlich, keine Fremdanfragen. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("assets/fonts/inter-var.woff2") format("woff2");
+}
+
 :root {
   --petrol:        #008C8C; /* Primär / Akzent */
   --petrol-dark:   #0F2F36; /* Hero / dunkle Flächen */
