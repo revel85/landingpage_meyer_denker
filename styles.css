@@ -1,0 +1,303 @@
+/* =========================================================================
+   NEXT by Meyer & Denker – Landingpage
+   Farben & Schriften aus der Marken-Präsentation abgeleitet.
+   ========================================================================= */
+
+:root {
+  --petrol:        #008C8C; /* Primär / Akzent */
+  --petrol-dark:   #0F2F36; /* Hero / dunkle Flächen */
+  --petrol-deep:   #0a2429; /* noch dunkler (Footer) */
+  --cream:         #F4F1EC; /* heller Hintergrund */
+  --terracotta:    #CE7359; /* sekundärer Akzent */
+  --ink:           #141a1c; /* Fließtext */
+  --muted:         #5a6a6d; /* gedämpfter Text */
+  --white:         #ffffff;
+  --line:          #e2ddd3; /* feine Trennlinien auf Creme */
+
+  --maxw: 1120px;
+  --radius: 16px;
+  --shadow: 0 12px 40px rgba(15, 47, 54, 0.12);
+  --shadow-sm: 0 4px 16px rgba(15, 47, 54, 0.08);
+
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 { line-height: 1.15; margin: 0 0 .5em; font-weight: 800; letter-spacing: -0.01em; }
+p { margin: 0 0 1rem; }
+a { color: var(--petrol); }
+
+img { max-width: 100%; display: block; }
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- Section rhythm ------------------------------------------------------ */
+section { padding: 84px 0; }
+.section-head { max-width: 720px; margin-bottom: 44px; }
+.eyebrow {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--petrol);
+  margin-bottom: 14px;
+}
+.section-head h2 { font-size: clamp(1.7rem, 3.5vw, 2.5rem); }
+.section-head p { color: var(--muted); font-size: 1.08rem; margin: 0; }
+
+.bg-cream { background: var(--cream); }
+.bg-white { background: var(--white); }
+
+/* --- Buttons ------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.btn-primary { background: var(--petrol); color: var(--white); }
+.btn-primary:hover { background: #00a1a1; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.btn-light { background: var(--white); color: var(--petrol-dark); }
+.btn-light:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.btn-outline { background: transparent; color: var(--petrol-dark); border-color: var(--petrol-dark); }
+.btn-outline:hover { background: var(--petrol-dark); color: var(--white); }
+
+/* --- Header -------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(244, 241, 236, 0.9);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
+}
+.brand img { height: 40px; width: auto; }
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a { color: var(--petrol-dark); text-decoration: none; font-weight: 600; font-size: .95rem; }
+.nav a:hover { color: var(--petrol); }
+.nav .btn { padding: 10px 20px; }
+.nav-links { display: flex; gap: 28px; }
+
+/* --- Hero ---------------------------------------------------------------- */
+.hero {
+  background: radial-gradient(1200px 600px at 80% -10%, rgba(0,140,140,.35), transparent 60%),
+              var(--petrol-dark);
+  color: var(--white);
+  padding: 96px 0 104px;
+  position: relative;
+  overflow: hidden;
+}
+.hero .claim {
+  font-size: .82rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: #7fd6d6; margin-bottom: 22px;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  max-width: 14ch;
+  margin-bottom: 20px;
+}
+.hero .lead {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: rgba(255,255,255,.82);
+  max-width: 56ch;
+  margin-bottom: 34px;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; }
+.pill {
+  border: 1px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.9);
+  padding: 8px 16px; border-radius: 999px; font-size: .9rem; font-weight: 600;
+}
+
+/* --- Über uns ------------------------------------------------------------ */
+.founders { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.founder-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.founder-card .avatar {
+  flex: 0 0 auto;
+  width: 108px; height: 108px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--petrol-dark);
+  box-shadow: var(--shadow-sm);
+}
+.founder-card .avatar img { width: 100%; height: 100%; object-fit: cover; }
+.founder-card h3 { font-size: 1.3rem; margin-bottom: 4px; }
+.founder-card .role { color: var(--petrol); font-weight: 600; font-size: .92rem; margin-bottom: 12px; }
+.founder-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .95rem; }
+.founder-quote {
+  grid-column: 1 / -1;
+  background: var(--petrol-dark);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 32px 40px;
+  font-size: 1.15rem;
+  font-style: italic;
+}
+.founder-quote strong { color: #7fd6d6; font-style: normal; }
+
+/* --- Karten-Grids (Personas, Mehrwert) ----------------------------------- */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+}
+.card .tag {
+  display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--terracotta); margin-bottom: 8px;
+}
+.card h3 { font-size: 1.2rem; }
+.card p { color: var(--muted); font-size: .96rem; margin-bottom: .6rem; }
+.card .relevant { font-size: .9rem; color: var(--petrol-dark); }
+.card .relevant strong { color: var(--petrol); }
+
+/* Mehrwert list-cards */
+.value-card { padding: 32px; }
+.value-card h3 { font-size: 1.35rem; margin-bottom: 18px; }
+.value-list { list-style: none; margin: 0; padding: 0; }
+.value-list li { position: relative; padding-left: 30px; margin-bottom: 16px; color: var(--muted); }
+.value-list li::before {
+  content: ""; position: absolute; left: 0; top: .55em;
+  width: 12px; height: 12px; border-radius: 3px;
+  background: var(--petrol);
+}
+.value-list li strong { color: var(--ink); display: block; }
+
+/* --- Vision -------------------------------------------------------------- */
+.vision {
+  background: var(--petrol-dark);
+  color: var(--white);
+}
+.vision .eyebrow { color: #7fd6d6; }
+.vision h2 { color: var(--white); font-size: clamp(1.7rem, 3.5vw, 2.5rem); }
+.vision p { color: rgba(255,255,255,.82); font-size: 1.12rem; max-width: 70ch; }
+.vision .highlight { color: var(--white); font-weight: 600; }
+
+/* --- Konzept ------------------------------------------------------------- */
+.concept-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px; }
+.stat {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 26px; box-shadow: var(--shadow-sm);
+}
+.stat .num { font-size: 2rem; font-weight: 800; color: var(--petrol); line-height: 1; margin-bottom: 8px; }
+.stat .label { color: var(--muted); font-size: .95rem; }
+
+.design-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.design-col h3 {
+  font-size: 1.1rem; padding-bottom: 12px; margin-bottom: 16px;
+  border-bottom: 2px solid var(--petrol);
+}
+.design-col ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .95rem; }
+.design-col ul li { margin-bottom: 8px; }
+.design-col.optional h3 { border-color: var(--terracotta); }
+.timeframe {
+  margin-top: 32px; text-align: center; font-weight: 600; color: var(--petrol-dark);
+  background: var(--white); border: 1px dashed var(--petrol); border-radius: 999px;
+  padding: 12px; box-shadow: var(--shadow-sm);
+}
+
+/* --- Preise -------------------------------------------------------------- */
+.pricing { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: start; }
+.price-card {
+  background: var(--petrol-dark); color: var(--white);
+  border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow);
+}
+.price-card .badge {
+  display: inline-block; background: var(--terracotta); color: var(--white);
+  font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 999px; margin-bottom: 20px;
+}
+.price-card .amount { font-size: 3rem; font-weight: 800; line-height: 1; }
+.price-card .was { color: rgba(255,255,255,.55); text-decoration: line-through; font-size: 1.2rem; margin-left: 8px; }
+.price-card .amount-sub { color: rgba(255,255,255,.8); margin-top: 8px; }
+.price-notes h3 { font-size: 1.15rem; }
+.price-notes ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .95rem; }
+.price-notes ul li { margin-bottom: 10px; }
+.price-notes .vat { font-size: .85rem; color: var(--muted); margin-top: 16px; }
+
+/* --- Kontakt / CTA ------------------------------------------------------- */
+.cta {
+  background: radial-gradient(900px 500px at 15% 120%, rgba(206,115,89,.35), transparent 60%),
+              var(--petrol);
+  color: var(--white);
+  text-align: center;
+}
+.cta h2 { font-size: clamp(2rem, 5vw, 3.2rem); color: var(--white); }
+.cta p { color: rgba(255,255,255,.9); font-size: 1.15rem; max-width: 52ch; margin: 0 auto 30px; }
+.cta-links { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.cta-links a.mail { font-size: 1.25rem; font-weight: 700; color: var(--white); text-decoration: none; }
+
+/* --- Footer -------------------------------------------------------------- */
+.site-footer {
+  background: var(--petrol-deep);
+  color: rgba(255,255,255,.7);
+  padding: 48px 0 40px;
+  font-size: .92rem;
+}
+.site-footer .footer-top {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 20px; margin-bottom: 28px;
+}
+.site-footer .footer-brand { color: var(--white); font-weight: 800; font-size: 1.3rem; letter-spacing: .04em; }
+.site-footer a { color: #7fd6d6; text-decoration: none; }
+.site-footer .legal { border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; }
+.site-footer .placeholder { color: #d8a08c; }
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 900px) {
+  .grid-3, .concept-grid, .design-grid { grid-template-columns: 1fr 1fr; }
+  .founders, .grid-2, .pricing { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+@media (max-width: 560px) {
+  section { padding: 60px 0; }
+  .grid-3, .concept-grid, .design-grid { grid-template-columns: 1fr; }
+  .founder-card { flex-direction: column; align-items: center; text-align: center; }
+  .founder-card ul { text-align: left; }
+  .price-card { padding: 28px; }
+  .price-card .amount { font-size: 2.4rem; }
+}
