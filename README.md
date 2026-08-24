@@ -30,8 +30,7 @@ Alle Texte stehen direkt in `index.html` – einfach im Editor ändern.
 
 - **Farben** ändern: Variablen ganz oben in `styles.css` (`:root { ... }`).
 - **Kontakt-E-Mail**: im HTML nach `next@meyerdenker.de` suchen und ersetzen.
-- **Porträts**: `assets/founder-1.png` (Marina Meyer) und `assets/founder-2.png` (Carina Denker).
-  → **Bitte die Zuordnung Name ↔ Foto einmal prüfen** und bei Bedarf tauschen.
+- **Porträts**: `assets/founder-2.png` (Marina Meyer) und `assets/founder-1.png` (Carina Denker).
 
 ## Noch zu ergänzen (vor dem finalen Livegang)
 
