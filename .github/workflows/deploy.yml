@@ -1,7 +1,8 @@
 name: Deploy to Strato
 
 # Lädt die statische Landingpage bei jedem Push auf `main` automatisch
-# per verschlüsseltem FTPS zum Strato-Webspace hoch.
+# per SFTP (Port 22) zum Strato-Webspace hoch.
+# Strato-Webhosting unterstützt kein FTP/FTPS (Port 21), nur SFTP.
 # Manuell auslösbar über den "Run workflow"-Button (workflow_dispatch).
 
 on:
@@ -25,7 +26,7 @@ jobs:
         run: |
           if [ -z "$STRATO_FTP_SERVER" ]; then
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::Strato-FTP-Secrets noch nicht gesetzt – Deploy wird übersprungen. Sobald STRATO_FTP_SERVER/USERNAME/PASSWORD als Secrets hinterlegt sind, läuft der Upload automatisch."
+            echo "::notice::Strato-SFTP-Secrets noch nicht gesetzt – Deploy wird übersprungen. Sobald STRATO_FTP_SERVER/USERNAME/PASSWORD als Secrets hinterlegt sind, läuft der Upload automatisch."
           else
             echo "ready=true" >> "$GITHUB_OUTPUT"
           fi
@@ -34,21 +35,25 @@ jobs:
         if: steps.cfg.outputs.ready == 'true'
         uses: actions/checkout@v4
 
-      - name: Upload zu Strato (FTPS)
+      - name: Web-Dateien sammeln
         if: steps.cfg.outputs.ready == 'true'
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        run: |
+          # Nur die tatsächlich auszuliefernden Dateien in dist/ kopieren
+          # (README, .github, Git-Interna bleiben außen vor).
+          mkdir -p dist
+          cp index.html styles.css dist/
+          cp -r assets dist/
+
+      - name: Upload zu Strato (SFTP)
+        if: steps.cfg.outputs.ready == 'true'
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server:   ${{ secrets.STRATO_FTP_SERVER }}
           username: ${{ secrets.STRATO_FTP_USERNAME }}
           password: ${{ secrets.STRATO_FTP_PASSWORD }}
-          protocol: ftps
-          # Zielordner im Webspace (Repo-Variable), z. B. "/" oder "/meyerdenker.de/".
-          # Fällt auf "/" zurück, wenn die Variable nicht gesetzt ist.
-          server-dir: ${{ vars.STRATO_REMOTE_DIR || '/' }}
-          # Nicht-Web-Dateien nicht mit hochladen:
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            README.md
-            **/*.md
+          port: 22
+          # Nur den Inhalt von dist/ hochladen:
+          local_path: './dist/*'
+          # Zielordner im Webspace (Repo-Variable), Fallback "/".
+          remote_path: ${{ vars.STRATO_REMOTE_DIR || '/' }}
+          sftp_only: true
