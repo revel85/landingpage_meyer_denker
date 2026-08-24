@@ -18,10 +18,24 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Konfiguration prüfen
+        id: cfg
+        env:
+          STRATO_FTP_SERVER: ${{ secrets.STRATO_FTP_SERVER }}
+        run: |
+          if [ -z "$STRATO_FTP_SERVER" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Strato-FTP-Secrets noch nicht gesetzt – Deploy wird übersprungen. Sobald STRATO_FTP_SERVER/USERNAME/PASSWORD als Secrets hinterlegt sind, läuft der Upload automatisch."
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
+        if: steps.cfg.outputs.ready == 'true'
         uses: actions/checkout@v4
 
       - name: Upload zu Strato (FTPS)
+        if: steps.cfg.outputs.ready == 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server:   ${{ secrets.STRATO_FTP_SERVER }}
