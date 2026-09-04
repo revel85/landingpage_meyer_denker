@@ -250,25 +250,6 @@ section { padding: 84px 0; }
   padding: 12px; box-shadow: var(--shadow-sm);
 }
 
-/* --- Preise -------------------------------------------------------------- */
-.pricing { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: start; }
-.price-card {
-  background: var(--petrol-dark); color: var(--white);
-  border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow);
-}
-.price-card .badge {
-  display: inline-block; background: var(--terracotta); color: var(--white);
-  font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-  padding: 6px 14px; border-radius: 999px; margin-bottom: 20px;
-}
-.price-card .amount { font-size: 3rem; font-weight: 800; line-height: 1; }
-.price-card .was { color: rgba(255,255,255,.55); text-decoration: line-through; font-size: 1.2rem; margin-left: 8px; }
-.price-card .amount-sub { color: rgba(255,255,255,.8); margin-top: 8px; }
-.price-notes h3 { font-size: 1.15rem; }
-.price-notes ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .95rem; }
-.price-notes ul li { margin-bottom: 10px; }
-.price-notes .vat { font-size: .85rem; color: var(--muted); margin-top: 16px; }
-
 /* --- Kontakt / CTA ------------------------------------------------------- */
 .cta {
   background: radial-gradient(900px 500px at 15% 120%, rgba(206,115,89,.35), transparent 60%),
@@ -300,7 +281,7 @@ section { padding: 84px 0; }
 /* --- Responsive ---------------------------------------------------------- */
 @media (max-width: 900px) {
   .grid-3, .concept-grid, .design-grid { grid-template-columns: 1fr 1fr; }
-  .founders, .grid-2, .pricing { grid-template-columns: 1fr; }
+  .founders, .grid-2 { grid-template-columns: 1fr; }
   .nav-links { display: none; }
 }
 @media (max-width: 560px) {
@@ -308,8 +289,6 @@ section { padding: 84px 0; }
   .grid-3, .concept-grid, .design-grid { grid-template-columns: 1fr; }
   .founder-card { flex-direction: column; align-items: center; text-align: center; }
   .founder-card ul { text-align: left; }
-  .price-card { padding: 28px; }
-  .price-card .amount { font-size: 2.4rem; }
 }
 
 /* --- Rechtsseiten (Impressum / Datenschutz) ------------------------------ */
