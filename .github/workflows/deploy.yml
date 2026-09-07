@@ -44,6 +44,10 @@ jobs:
           cp index.html impressum.html datenschutz.html styles.css robots.txt sitemap.xml .htaccess dist/
           cp -r assets dist/
 
+      # WICHTIG: local_path MUSS auf den *Inhalt* von dist/ zeigen ('./dist/*'),
+      # damit die Dateien direkt in den Web-Root landen. Mit './dist/' würde
+      # sftp `put -r ./dist/ /` den Ordner selbst hochladen -> /dist/index.html
+      # (falscher Pfad, Seite bleibt unverändert).
       - name: Upload zu Strato (SFTP)
         if: steps.cfg.outputs.ready == 'true'
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -52,8 +56,19 @@ jobs:
           username: ${{ secrets.STRATO_FTP_USERNAME }}
           password: ${{ secrets.STRATO_FTP_PASSWORD }}
           port: 22
-          # Ganzes dist/-Verzeichnis hochladen (inkl. Dotfiles wie .htaccess):
-          local_path: './dist/'
-          # Zielordner im Webspace (Repo-Variable), Fallback "/".
+          local_path: './dist/*'
+          remote_path: ${{ vars.STRATO_REMOTE_DIR || '/' }}
+          sftp_only: true
+
+      # './dist/*' erfasst keine Dotfiles -> .htaccess separat nachladen.
+      - name: Upload .htaccess zu Strato (SFTP)
+        if: steps.cfg.outputs.ready == 'true'
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server:   ${{ secrets.STRATO_FTP_SERVER }}
+          username: ${{ secrets.STRATO_FTP_USERNAME }}
+          password: ${{ secrets.STRATO_FTP_PASSWORD }}
+          port: 22
+          local_path: './dist/.htaccess'
           remote_path: ${{ vars.STRATO_REMOTE_DIR || '/' }}
           sftp_only: true
