@@ -83,10 +83,9 @@ jobs:
           RDIR: ${{ vars.STRATO_REMOTE_DIR || '/' }}
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq sshpass
-          sshpass -p "$PW" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 22 -b - "$USR@$SRV" <<SFTP
+          sshpass -p "$PW" sftp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            -o PubkeyAuthentication=no -o PreferredAuthentications=password -o NumberOfPasswordPrompts=1 \
+            -P 22 "$USR@$SRV" <<SFTP || true
           pwd
           ls -la $RDIR
-          get $RDIR.htaccess /tmp/remote_htaccess || true
           SFTP
-          echo "===== REMOTE .htaccess ====="
-          cat /tmp/remote_htaccess 2>/dev/null || echo "(keine .htaccess gefunden)"
