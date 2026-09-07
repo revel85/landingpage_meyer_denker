@@ -41,7 +41,7 @@ jobs:
           # Nur die tatsächlich auszuliefernden Dateien in dist/ kopieren
           # (README, .github, Git-Interna bleiben außen vor).
           mkdir -p dist
-          cp index.html impressum.html datenschutz.html styles.css dist/
+          cp index.html impressum.html datenschutz.html styles.css robots.txt sitemap.xml .htaccess dist/
           cp -r assets dist/
 
       - name: Upload zu Strato (SFTP)
@@ -52,8 +52,8 @@ jobs:
           username: ${{ secrets.STRATO_FTP_USERNAME }}
           password: ${{ secrets.STRATO_FTP_PASSWORD }}
           port: 22
-          # Nur den Inhalt von dist/ hochladen:
-          local_path: './dist/*'
+          # Ganzes dist/-Verzeichnis hochladen (inkl. Dotfiles wie .htaccess):
+          local_path: './dist/'
           # Zielordner im Webspace (Repo-Variable), Fallback "/".
           remote_path: ${{ vars.STRATO_REMOTE_DIR || '/' }}
           sftp_only: true

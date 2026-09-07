@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meyerdenker.de/sitemap.xml
