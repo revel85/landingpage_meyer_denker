@@ -72,18 +72,3 @@ jobs:
           local_path: './dist/.htaccess'
           remote_path: ${{ vars.STRATO_REMOTE_DIR || '/' }}
           sftp_only: true
-
-      # TEMPORÄR: Live-Seite direkt vom Runner (freier Internetzugang) prüfen.
-      - name: DIAG live HTTP checks
-        if: steps.cfg.outputs.ready == 'true'
-        run: |
-          for u in \
-            "http://meyerdenker.de/" \
-            "https://meyerdenker.de/" \
-            "https://meyerdenker.de/impressum.html" \
-            "https://meyerdenker.de/datenschutz.html" \
-            "https://www.meyerdenker.de/"; do
-            echo "===== $u ====="
-            curl -sS -o /dev/null -D - -m 25 "$u" 2>&1 | grep -iE '^HTTP/|^location:|^content-type:' || echo "(keine Antwort)"
-            echo
-          done
